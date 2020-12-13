@@ -1,0 +1,123 @@
+package com.elt.server.enums;
+
+import java.util.Random;
+
+public enum BizModel {
+
+    BM000(),
+    BM001(),
+    BM002(),
+    BM003(),
+    BM004(),
+    BM005(),
+    BM006(),
+    BM007(),
+    BM008(),
+    BM009(),
+    BM010(),
+    BM011(),
+    BM012(),
+    BM013(),
+    BM014(),
+    BM015(),
+    BM016(),
+    BM017(),
+    BM018(),
+    BM019(),
+    BM020(),
+    BM021(),
+    BM022(),
+    BM023(),
+    BM024(),
+    BM025(),
+    BM026(),
+    BM027(),
+    BM028(),
+    BM029(),
+    BM030(),
+    BM031(),
+    BM032(),
+    BM033(),
+    BM034(),
+    BM035(),
+    BM036(),
+    BM037(),
+    BM038(),
+    BM039(),
+    BM040(),
+    BM041(),
+    BM042(),
+    BM043(),
+    BM044(),
+    BM045(),
+    BM046(),
+    BM047(),
+    BM048(),
+    BM049(),
+    BM050(),
+    BM051(),
+    BM052(),
+    BM053(),
+    BM054(),
+    BM055(),
+    BM056(),
+    BM057(),
+    BM058(),
+    BM059(),
+    BM060(),
+    BM061(),
+    BM062(),
+    BM063(),
+    BM064(),
+    BM065(),
+    BM066(),
+    BM067(),
+    BM068(),
+    BM069(),
+    BM070(),
+    BM071(),
+    BM072(),
+    BM073(),
+    BM074(),
+    BM075(),
+    BM076(),
+    BM077(),
+    BM078(),
+    BM079(),
+    BM080(),
+    BM081(),
+    BM082(),
+    BM083(),
+    BM084(),
+    BM085(),
+    BM086(),
+    BM087(),
+    BM088(),
+    BM089(),
+    BM090(),
+    BM091(),
+    BM092(),
+    BM093(),
+    BM094(),
+    BM095(),
+    BM096(),
+    BM097(),
+    BM098(),
+    BM099(),
+    ;
+
+    public static BizModel random() {
+        BizModel[] values = values();
+        int length = values.length;
+        Random random = new Random();
+        return values[random.nextInt(length)];
+    }
+
+    public static void main(String[] args) {
+        /*for (int i = 0; i < 100; i++) {
+            System.out.println(String.format("BM%0,3d(),", i));
+        }
+        System.out.println();*/
+        System.out.println(random());
+    }
+}

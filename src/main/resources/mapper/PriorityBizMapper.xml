@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elt.server.mapper.PriorityBizMapper">
+    <resultMap id="BaseResultMap" type="com.elt.server.model.PriorityBiz">
+        <id column="id_priority_biz" jdbcType="VARCHAR" property="idPriorityBiz"/>
+        <result column="biz_model" jdbcType="VARCHAR" property="bizModel"/>
+        <result column="priority" jdbcType="VARCHAR" property="priority"/>
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
+        <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate"/>
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id_priority_biz, biz_model, priority, created_date, created_by, updated_date, updated_by
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from priority_biz
+        where id_priority_biz = #{idPriorityBiz,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listAfter" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from priority_biz
+        where id_priority_biz &gt; #{id,jdbcType=VARCHAR}
+        order by id_priority_biz
+        limit #{limit}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from priority_biz
+        where id_priority_biz = #{idPriorityBiz,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.elt.server.model.PriorityBiz">
+        insert into priority_biz (id_priority_biz, biz_model, priority,
+        created_date, created_by, updated_date,
+        updated_by)
+        values (#{idPriorityBiz,jdbcType=VARCHAR}, #{bizModel,jdbcType=VARCHAR}, #{priority,jdbcType=VARCHAR},
+        #{createdDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{updatedDate,jdbcType=TIMESTAMP},
+        #{updatedBy,jdbcType=VARCHAR})
+    </insert>
+    <update id="batchMerge">
+        replace into priority_biz (id_priority_biz, biz_model, priority,
+        created_date, created_by, updated_date, updated_by) values
+        <foreach collection="list" item="i" separator=",">
+            (#{i.idPriorityBiz,jdbcType=VARCHAR}, #{i.bizModel,jdbcType=VARCHAR}, #{i.priority,jdbcType=VARCHAR},
+            #{i.createdDate,jdbcType=TIMESTAMP}, #{i.createdBy,jdbcType=VARCHAR}, #{i.updatedDate,jdbcType=TIMESTAMP},
+            #{i.updatedBy,jdbcType=VARCHAR})
+        </foreach>
+    </update>
+    <insert id="insertSelective" parameterType="com.elt.server.model.PriorityBiz">
+        insert into priority_biz
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="idPriorityBiz != null">
+                id_priority_biz,
+            </if>
+            <if test="bizModel != null">
+                biz_model,
+            </if>
+            <if test="priority != null">
+                priority,
+            </if>
+            <if test="createdDate != null">
+                created_date,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedDate != null">
+                updated_date,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="idPriorityBiz != null">
+                #{idPriorityBiz,jdbcType=VARCHAR},
+            </if>
+            <if test="bizModel != null">
+                #{bizModel,jdbcType=VARCHAR},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedDate != null">
+                #{updatedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.elt.server.model.PriorityBiz">
+        update priority_biz
+        <set>
+            <if test="bizModel != null">
+                biz_model = #{bizModel,jdbcType=VARCHAR},
+            </if>
+            <if test="priority != null">
+                priority = #{priority,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                created_date = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedDate != null">
+                updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id_priority_biz = #{idPriorityBiz,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.elt.server.model.PriorityBiz">
+        update priority_biz
+        set biz_model = #{bizModel,jdbcType=VARCHAR},
+        priority = #{priority,jdbcType=VARCHAR},
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+        created_by = #{createdBy,jdbcType=VARCHAR},
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+        updated_by = #{updatedBy,jdbcType=VARCHAR}
+        where id_priority_biz = #{idPriorityBiz,jdbcType=VARCHAR}
+    </update>
+</mapper>

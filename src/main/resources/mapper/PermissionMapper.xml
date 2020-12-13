@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elt.server.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.elt.server.model.Permission">
+    <id column="id_permission" jdbcType="VARCHAR" property="idPermission" />
+    <result column="id_user" jdbcType="VARCHAR" property="idUser" />
+    <result column="biz_model" jdbcType="VARCHAR" property="bizModel" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_permission, id_user, biz_model, org_code, created_date, created_by, updated_date, 
+    updated_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where id_permission = #{idPermission,jdbcType=VARCHAR}
+  </select>
+
+  <select id="listByIdUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+    where id_user = #{idUser,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from permission
+    where id_permission = #{idPermission,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.elt.server.model.Permission">
+    insert into permission (id_permission, id_user, biz_model, 
+      org_code, created_date, created_by, 
+      updated_date, updated_by)
+    values (#{idPermission,jdbcType=VARCHAR}, #{idUser,jdbcType=VARCHAR}, #{bizModel,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, 
+      #{updatedDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR})
+  </insert>
+  <update id="batchMerge">
+    replace into permission (id_permission, id_user, biz_model, org_code, created_date, created_by,
+    updated_date, updated_by) values
+    <foreach collection="list" item="i" separator=",">
+    (#{i.idPermission,jdbcType=VARCHAR}, #{i.idUser,jdbcType=VARCHAR}, #{i.bizModel,jdbcType=VARCHAR},
+    #{i.orgCode,jdbcType=VARCHAR}, #{i.createdDate,jdbcType=TIMESTAMP}, #{i.createdBy,jdbcType=VARCHAR},
+    #{i.updatedDate,jdbcType=TIMESTAMP}, #{i.updatedBy,jdbcType=VARCHAR})
+    </foreach>
+  </update>
+  <insert id="insertSelective" parameterType="com.elt.server.model.Permission">
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idPermission != null">
+        id_permission,
+      </if>
+      <if test="idUser != null">
+        id_user,
+      </if>
+      <if test="bizModel != null">
+        biz_model,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="updatedDate != null">
+        updated_date,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idPermission != null">
+        #{idPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="idUser != null">
+        #{idUser,jdbcType=VARCHAR},
+      </if>
+      <if test="bizModel != null">
+        #{bizModel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedDate != null">
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elt.server.model.Permission">
+    update permission
+    <set>
+      <if test="idUser != null">
+        id_user = #{idUser,jdbcType=VARCHAR},
+      </if>
+      <if test="bizModel != null">
+        biz_model = #{bizModel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedDate != null">
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_permission = #{idPermission,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elt.server.model.Permission">
+    update permission
+    set id_user = #{idUser,jdbcType=VARCHAR},
+      biz_model = #{bizModel,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=VARCHAR}
+    where id_permission = #{idPermission,jdbcType=VARCHAR}
+  </update>
+</mapper>
